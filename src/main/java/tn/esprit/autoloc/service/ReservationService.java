@@ -1,0 +1,44 @@
+package tn.esprit.autoloc.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import tn.esprit.autoloc.domain.Reservation;
+import tn.esprit.autoloc.repository.Reservationrepository;
+
+import java.util.List;
+
+@Service
+public class ReservationService implements IReservationService {
+    @Autowired
+    Reservationrepository reservationRepo;
+
+    @Override
+    public List<Reservation> retrieveAllReservations() {
+        return (List<Reservation>) reservationRepo.findAll();
+    }
+
+    @Override
+    public Reservation addReservation(Reservation r) {
+        return reservationRepo.save(r);
+    }
+
+    @Override
+    public Reservation updateReservation(Reservation r) {
+        return reservationRepo.save(r);
+    }
+
+    @Override
+    public Reservation retrieveReservation(Long idReservation) {
+        return reservationRepo.findById(idReservation).orElse(null);
+    }
+
+    @Override
+    public void removeReservation(Long idReservation) {
+        reservationRepo.deleteById(idReservation);
+    }
+
+    @Override
+    public List<Reservation> addReservations(List<Reservation> reservations) {
+        return (List<Reservation>) reservationRepo.saveAll(reservations);
+    }
+}
